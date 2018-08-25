@@ -1,37 +1,34 @@
 <!DOCTYPE html>
 
-<html ng-app='PomApp'>
+<html ng-app='PomApp' ng-controller="myCtrl">
   <head>
-    <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script src="script.js"></script>
   </head>
 
-<body ng-controller="myCtrl" ng-click='Cancel()'>
+<body ng-click='Cancel()'>
 <h1>Pomodoro Clock</h1>
 <div class='center'>
   <p>BREAK LENGTH</p> 
   <div class='group'>
-    <button ng-disabled='isPress' ng-click='Break()'>-</button>
+    <button class='dec' ng-disabled='isPress' ng-click='Break($event)'>-</button>
     <p class='num'>{{br}}</p>
-    <button ng-disabled='isPress' ng-click='Break1()'>+</button>
+    <button class='inc' ng-disabled='isPress' ng-click='Break($event)'>+</button>
   </div>
 </div>
 <div class='center'>
   <p>SESSION LENGTH</p>
   <div class='group'>
-    <button ng-disabled='isPress' ng-click='Session()'>-</button>
+    <button class='dec' ng-disabled='isPress' ng-click='Session($event)'>-</button>
     <p class='num'>{{se}}</p>
-    <button ng-disabled='isPress' ng-click='Session1()'>+</button>
+    <button class='inc' ng-disabled='isPress' ng-click='Session($event)'>+</button>
   </div>
 </div>
-<div></div>
 <div id='clock' ng-click='TimerBS()'>
-    <h4>{{head}}</h4>
-    <p>{{time}}</p><span class="fill" ng-style="{'height':fillHeight, 'background':fillColor }"></span>
+  <h2>{{head}}</h2>
+  <p>{{time}}</p>
+  <span class="fill" ng-style="{'height':fillHeight, 'background':fillColor }"></span>
 </div>
 </body>
 </html>
