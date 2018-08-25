@@ -4,34 +4,24 @@ app.controller('myCtrl', function($scope, $timeout) {
   $scope.se = 25;
   $scope.time = $scope.se;
   $scope.fillHeight = '0%';
-  var minute, hour, second, secs, perc=0;
-  $scope.Session = function() {
-   if ($scope.se>1)  
-     $scope.se--;
-    if ($scope.head === 'Session'){
-     $scope.time=$scope.se;
-    } 
-   };
-  $scope.Session1 = function() { 
-     $scope.se++;
-     if ($scope.head === 'Session'){
-     $scope.time=$scope.se;
-      } 
-    };
-  $scope.Break = function() {
-   if ($scope.br>1) 
-     $scope.br--;
-    if ($scope.head === 'Break!'){
-     $scope.time=$scope.br;
-    } 
-  };
-   $scope.Break1 = function() {
-     $scope.br++;
-    if ($scope.head === 'Break!'){
-     $scope.time=$scope.br;
-    }
-   };
   $scope.head = 'Session';
+  var minute, hour, second, secs, perc=0;
+  $scope.Session = function(event) {
+    if ($scope.se>1 && event.target.className==='dec')  
+      $scope.se--;
+    else if (event.target.className==='inc')
+      $scope.se++;
+    if ($scope.head === 'Session')
+     $scope.time=$scope.se;
+   };
+  $scope.Break = function(event) {
+    if ($scope.br>1 && event.target.className==='dec') 
+      $scope.br--;
+    else if (event.target.className==='inc')
+      $scope.br++;
+    if ($scope.head === 'Break!')
+     $scope.time=$scope.br;
+  };
   //функция таймера
   var timeout='';
   function Time() {
@@ -40,16 +30,14 @@ app.controller('myCtrl', function($scope, $timeout) {
     if ($scope.head === 'Session') {
       $scope.head = 'Session';
       $scope.time = $scope.se;
-      $scope.fillColor = 'green';
-      secs = 60 * $scope.time;
-      perc =0;
+      $scope.fillColor = 'green';    
     } else {
       $scope.head = 'Break!';
       $scope.time = $scope.br;
       $scope.fillColor = 'red';
+    }
       secs = 60 * $scope.time;
       perc =0;
-    }
      //вычисляем новое время сессии
       if($scope.time>60) {
        hour =Math.round(($scope.time - $scope.time%60)/60);
@@ -59,9 +47,11 @@ app.controller('myCtrl', function($scope, $timeout) {
       }
       second=60;
     }
-   //сам таймер
+    Timer();
+    }
+  //сам таймер
   function Timer(){
-  var end = false;
+  let end = false;
       if( second > 0 ) second--;
       else{second = 59;
           if( minute > 0 ) minute--;
@@ -103,11 +93,9 @@ app.controller('myCtrl', function($scope, $timeout) {
       }
       timeout = $timeout(Timer, 1000);
      }
-      }
-    Timer();
     }
   //событие по клику
-  var isPress = false;
+  let isPress = false;
   $scope.TimerBS = function(){
     if (!isPress){
       Time(); 
