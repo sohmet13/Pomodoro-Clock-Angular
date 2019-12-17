@@ -1,3 +1,7 @@
+import angular from 'angular';
+
+import './style.scss';
+
 var app = angular.module('PomApp', []);
 app.controller('myCtrl', function($scope, $timeout) {
   $scope.br = 5;

@@ -2,7 +2,7 @@
   "name": "pomodoro-clock",
   "version": "1.0.0",
   "description": "This is Pomodoro Clock. Made with the usage of Angular.",
-  "main": "script.js",
+  "main": "src/script.js",
   "scripts": {
     "build": "webpack -p",
     "watch": "webpack --watch",
@@ -29,6 +29,7 @@
     "sass-loader": "^8.0.0",
     "style-loader": "^1.0.1",
     "webpack": "^4.41.3",
+    "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.9.0"
   }
 }
