@@ -1,32 +1,32 @@
 <!DOCTYPE html>
 
-<html ng-app='PomApp' ng-controller="myCtrl">
+<html>
   <head>
     <script type="text/javascript" src="dist/bundle.js" charset="utf-8"></script>
   </head>
 
-<body ng-click='Cancel()'>
-<h1>Pomodoro Clock</h1>
-<div class='center'>
-  <p>BREAK LENGTH</p> 
-  <div class='group'>
-    <button class='dec' ng-disabled='isPress' ng-click='Break($event)'>-</button>
-    <p class='num'>{{br}}</p>
-    <button class='inc' ng-disabled='isPress' ng-click='Break($event)'>+</button>
-  </div>
-</div>
-<div class='center'>
-  <p>SESSION LENGTH</p>
-  <div class='group'>
-    <button class='dec' ng-disabled='isPress' ng-click='Session($event)'>-</button>
-    <p class='num'>{{se}}</p>
-    <button class='inc' ng-disabled='isPress' ng-click='Session($event)'>+</button>
-  </div>
-</div>
-<div id='clock' ng-click='TimerBS()'>
-  <h2>{{head}}</h2>
-  <p>{{time}}</p>
-  <span class="fill" ng-style="{'height':fillHeight, 'background':fillColor }"></span>
-</div>
-</body>
+  <body ng-app='PomApp' ng-controller="myCtrl" ng-click='Cancel()'>
+    <h1 class="header">Pomodoro Clock</h1>
+    <div class='time-change'>
+      <p class="time-change__header">BREAK LENGTH</p>
+      <div>
+        <button class='time-change__button dec' ng-disabled='isPress' ng-click='Break($event)'>-</button>
+        <span class='time-change__minutes'>{{br}}</span>
+        <button class='time-change__button inc' ng-disabled='isPress' ng-click='Break($event)'>+</button>
+      </div>
+    </div>
+    <div class='time-change'>
+      <p class="time-change__header">SESSION LENGTH</p>
+      <div>
+        <button class='time-change__button dec' ng-disabled='isPress' ng-click='Session($event)'>-</button>
+        <span class='time-change__minutes'>{{se}}</span>
+        <button class='time-change__button inc' ng-disabled='isPress' ng-click='Session($event)'>+</button>
+      </div>
+    </div>
+    <div class='clock' ng-click='TimerBS()'>
+      <h2 class="clock__header">{{head}}</h2>
+      <p class="clock__time">{{time}}</p>
+      <span class="fill" ng-style="{'height':fillHeight, 'background':fillColor }"></span>
+    </div>
+  </body>
 </html>
