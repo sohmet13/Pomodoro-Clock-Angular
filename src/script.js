@@ -4,52 +4,51 @@ import './style.scss';
 
 const app = angular.module('PomApp', []);
 app.controller('myCtrl', function($scope, $timeout) {
-  $scope.breakValue = 5;
-  $scope.sessionValue = 25;
-  $scope.time = $scope.sessionValue;
+  $scope.sessionName = 'session';
+  $scope.breakName = 'break';
+
+  $scope.active = $scope.sessionName;
+
+  $scope.periodsParams = {
+    [$scope.sessionName]: {
+      head: 'Session',
+      minutes: 25,
+      fillClass: 'fill_green'
+    },
+    [$scope.breakName]: {
+      head: 'Break!',
+      minutes: 5,
+      fillClass: 'fill_red'
+    }
+  };
+
+  $scope.time = $scope.periodsParams[$scope.active].minutes;
   $scope.fillHeight = 0;
-  $scope.head = 'Session';
   $scope.timerIsOn = false;
-  let minute, hour, second, secs;
+  let minute, hour, second, secs, timeout;
 
-  const setTime = (varName) => {
-    if ($scope.head === 'Session' && varName === 'sessionValue')
-      $scope.time = $scope.sessionValue;
-    else if ($scope.head === 'Break!' && varName === 'breakValue')
-      $scope.time = $scope.breakValue;
-  };
-
-  const toggleTimerStyle = (header) => {
-    if ($scope.head === header) {
-      $scope.head = 'Session';
-      $scope.time = $scope.sessionValue;
-      $scope.fillClass = 'fill_green';
-    } else {
-      $scope.head = 'Break!';
-      $scope.time = $scope.breakValue;
-      $scope.fillClass = 'fill_red';
+  const updateTime = (periodName) => {
+    if ($scope.active === periodName) {
+      $scope.time = $scope.periodsParams[$scope.active].minutes;
     }
   };
 
-  const setUITime = (time) => time < 10 ? `0${time}` : time;
-
-  $scope.decrement = (varName) => {
-    if ($scope[varName] > 1) {
-      $scope[varName]--;
+  $scope.decrement = (periodName) => {
+    if ($scope.periodsParams[periodName].minutes > 1) {
+      $scope.periodsParams[periodName].minutes--;
     }
-    setTime(varName);
+    updateTime(periodName);
   };
 
-  $scope.increment = (varName) => {
-    $scope[varName]++;
-    setTime(varName);
+  $scope.increment = (periodName) => {
+    $scope.periodsParams[periodName].minutes++;
+    updateTime(periodName);
   };
 
-  //функция таймера
-  let timeout;
+  const setUITime = (time) => `${time < 10 ? '0' : ''}${time}`;
+
+  // парсим числа во время
   const parseNumberToMinutes = () => {
-    //заголовок и изначальные значения
-    toggleTimerStyle('Session');
     secs = 60 * $scope.time;
     $scope.fillHeight = 0;
     //вычисляем новое время сессии
@@ -62,10 +61,13 @@ app.controller('myCtrl', function($scope, $timeout) {
     second = 60;
   };
 
+  // определяем действия в конце каждой секунды
   const timerEndActions = (isTimerEnd) => {
     if (isTimerEnd) {
+      // меняем заголовок и время
+      $scope.active = $scope.active === $scope.sessionName ? $scope.breakName : $scope.sessionName;
+      $scope.time = $scope.periodsParams[$scope.active].minutes;
       //переключаем таймеры
-      toggleTimerStyle('Break!');
       parseNumberToMinutes();
       decrementSeconds();
     } else {
@@ -77,7 +79,7 @@ app.controller('myCtrl', function($scope, $timeout) {
       timeout = $timeout(decrementSeconds, 1000);
     }
   };
-  //сам таймер
+  // отнимаем время по одной секунде
   function decrementSeconds(){
     let end = false;
     if( second > 0 ) second--;
@@ -101,7 +103,7 @@ app.controller('myCtrl', function($scope, $timeout) {
     if ($scope.timerIsOn){
       $timeout.cancel(timeout);
     } else {
-      if (Number.parseInt($scope.time)) {
+      if (typeof $scope.time === 'number') {
         parseNumberToMinutes();
       }
       decrementSeconds();

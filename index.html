@@ -10,23 +10,23 @@
     <div class='time-change'>
       <p class="time-change__header">BREAK LENGTH</p>
       <div>
-        <button class='time-change__button dec' ng-disabled='timerIsOn' ng-click='decrement("breakValue")'>-</button>
-        <span class='time-change__minutes'>{{breakValue}}</span>
-        <button class='time-change__button inc' ng-disabled='timerIsOn' ng-click='increment("breakValue")'>+</button>
+        <button class='time-change__button dec' ng-disabled='timerIsOn' ng-click='decrement(breakName)'>-</button>
+        <span class='time-change__minutes'>{{periodsParams.break.minutes}}</span>
+        <button class='time-change__button inc' ng-disabled='timerIsOn' ng-click='increment(breakName)'>+</button>
       </div>
     </div>
     <div class='time-change'>
       <p class="time-change__header">SESSION LENGTH</p>
       <div>
-        <button class='time-change__button dec' ng-disabled='timerIsOn' ng-click='decrement("sessionValue")'>-</button>
-        <span class='time-change__minutes'>{{sessionValue}}</span>
-        <button class='time-change__button inc' ng-disabled='timerIsOn' ng-click='increment("sessionValue")'>+</button>
+        <button class='time-change__button dec' ng-disabled='timerIsOn' ng-click='decrement(sessionName)'>-</button>
+        <span class='time-change__minutes'>{{periodsParams.session.minutes}}</span>
+        <button class='time-change__button inc' ng-disabled='timerIsOn' ng-click='increment(sessionName)'>+</button>
       </div>
     </div>
     <div class='clock' ng-click='toggleTimer()'>
-      <h2 class="clock__header">{{head}}</h2>
+      <h2 class="clock__header">{{periodsParams[active].head}}</h2>
       <p class="clock__time">{{time}}</p>
-      <span class="fill" ng-class="fillClass" ng-style="{'height': fillHeight + '%' }"></span>
+      <span class="fill" ng-class="periodsParams[active].fillClass" ng-style="{'height': fillHeight + '%' }"></span>
     </div>
   </body>
 </html>
