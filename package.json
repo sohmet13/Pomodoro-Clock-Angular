@@ -1,0 +1,35 @@
+{
+  "name": "pomodoro-clock",
+  "version": "1.0.0",
+  "description": "This is Pomodoro Clock. Made with the usage of Angular.",
+  "main": "src/script.js",
+  "scripts": {
+    "build": "webpack -p",
+    "watch": "webpack --watch",
+    "start": "webpack-dev-server",
+    "eslint": "eslint . --ext .js --ignore-pattern dist/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sohmet13/pomodoro-clock.git"
+  },
+  "author": "Anna Loshchakova",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sohmet13/pomodoro-clock/issues"
+  },
+  "homepage": "https://github.com/sohmet13/pomodoro-clock#readme",
+  "dependencies": {
+    "angular": "^1.7.9"
+  },
+  "devDependencies": {
+    "css-loader": "^3.3.2",
+    "eslint": "^6.7.2",
+    "node-sass": "^4.13.0",
+    "sass-loader": "^8.0.0",
+    "style-loader": "^1.0.1",
+    "": "^4.41.3",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0"
+  }
+}
